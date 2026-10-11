@@ -1,4 +1,4 @@
-﻿REM  *****  BASIC  *****
+REM  *****  BASIC  *****
 
 Sub CleanBankExport
     Dim oSheet As Object, oCur As Object, oRange As Object, oDesc As Object
@@ -8,7 +8,7 @@ Sub CleanBankExport
 
     ' --- hide columns (0-based) ---
     Dim hideCols As Variant
-    hideCols = Array(1, 4, 8, 9, 10, 11, 12, 14, 15, 16, 21, 22)
+    hideCols = Array(0,3,7,8,9,10,11,13,14,15,20,21)
     For i = 0 To UBound(hideCols)
         oSheet.Columns.getByIndex(hideCols(i)).IsVisible = False
     Next
@@ -48,7 +48,7 @@ Sub CleanBankExport
     oDesc.IsCaseSensitive = False
 
     Dim aField(0) As New com.sun.star.sheet.TableFilterField
-    aField(0).Field = 19
+    aField(0).Field = 18
     aField(0).Operator = com.sun.star.sheet.FilterOperator.NOT_EQUAL
     aField(0).IsNumeric = False
     aField(0).StringValue = "[ \u00A0]*(Poplatok za balík|Poplatky za transakcie|POS [0-9., ]+EUR|Transakčná daň).*"
