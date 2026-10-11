@@ -53,7 +53,7 @@ Sub CleanBankExport
     aField(0).Field = 18
     aField(0).Operator = com.sun.star.sheet.FilterOperator.NOT_EQUAL
     aField(0).IsNumeric = False
-    aField(0).StringValue = "(Poplatok za balík|Poplatky za transakcie|POS|Transakčná daň).*"
+    aField(0).StringValue = "(Poplatok za balík|Poplatky za transakcie|POS|Transakčná daň|Mesačný poplatok).*"
 
     ' condition 2: column E (index 4) must be "Debet"
     aField(1).Connection = com.sun.star.sheet.FilterConnection.AND
