@@ -47,14 +47,24 @@ Sub CleanBankExport
     oDesc.UseRegularExpressions = True
     oDesc.IsCaseSensitive = False
 
-    Dim aField(0) As New com.sun.star.sheet.TableFilterField
+    Dim aField(1) As New com.sun.star.sheet.TableFilterField
+
+    ' condition 1: column 18 must NOT match the fee/POS patterns
     aField(0).Field = 18
     aField(0).Operator = com.sun.star.sheet.FilterOperator.NOT_EQUAL
     aField(0).IsNumeric = False
-    aField(0).StringValue = "[ \u00A0]*(Poplatok za balík|Poplatky za transakcie|POS [0-9., ]+EUR|Transakčná daň).*"
+    aField(0).StringValue = "(Poplatok za balík|Poplatky za transakcie|POS|Transakčná daň).*"
+
+    ' condition 2: column E (index 4) must be "Debet"
+    aField(1).Connection = com.sun.star.sheet.FilterConnection.AND
+    aField(1).Field = 4
+    aField(1).Operator = com.sun.star.sheet.FilterOperator.EQUAL
+    aField(1).IsNumeric = False
+    aField(1).StringValue = "Debet"
 
     oDesc.setFilterFields(aField())
     oDB.refresh()
+
 End Sub
 
 Sub Main
